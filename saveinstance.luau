@@ -2879,7 +2879,7 @@ local function synsaveinstance(CustomOptions, CustomOptions2)
 	print("Finished caching")
 	local newnewCache = {}
 	for i,v in pairs(newCache) do
-		newnewCache[i] = map[i]
+		newnewCache[i] = map[getscriptbytecode(i)]
 	end
 	print("Done mapping.")
 	newCache = newnewCache;
