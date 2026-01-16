@@ -2846,7 +2846,6 @@ local function synsaveinstance(CustomOptions, CustomOptions2)
 			if isLuaSourceContainer(v) and not v:IsA("Script") then
 			print(v.Name)
 			newCache[v] = getscriptbytecode(v)
-			wait(.1)
 			print(v.Name, "Done")
 			end
 		end
