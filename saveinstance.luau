@@ -2839,6 +2839,16 @@ local function synsaveinstance(CustomOptions, CustomOptions2)
 		end
 	end
 
+	local newCache = {}
+
+	if DecompileJobless then
+		for i,v in pairs(ToSaveInstance:GetDescendants()) do
+			newCache[v] = decompile(v)
+			print(v.Name)
+		end
+	end
+
+	for i,v in pairs(
 	do
 		local Decompiler = decompile
 
@@ -2852,6 +2862,9 @@ local function synsaveinstance(CustomOptions, CustomOptions2)
 			ldecompile = function(script)
 				-- local name = scr.ClassName .. scr.Name
 				local bytecode
+				if DecompileJobless and newCache[script] then
+					return newCache[script]
+				end
 				if ScriptCache then
 					local s
 					s, bytecode = getbytecode(script)
