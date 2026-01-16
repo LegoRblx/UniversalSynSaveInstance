@@ -2855,6 +2855,8 @@ local function synsaveinstance(CustomOptions, CustomOptions2)
 	local map = {}
 	print("Caching...")
 	task.wait(5)
+	local calc = 0
+	local totalCalc = #newCache
 	for i,v in pairs(newCache) do
 		if not map[v] then
 			tasks = tasks + 1
@@ -2870,11 +2872,17 @@ local function synsaveinstance(CustomOptions, CustomOptions2)
 			print(tasks)
 		task.wait(.5)
 		end
+		calc = calc + 1
+		print(totalCalc, calc)
 	end
-	newCache = map;
 	repeat task.wait() until tasks <= 0
 	print("Finished caching")
-
+	local newnewCache = {}
+	for i,v in pairs(newCache) do
+		newnewCache[i] = map[v]
+	end
+	print("Done mapping.", )
+	newCache = newnewCache;
 	do
 		local Decompiler = decompile
 
