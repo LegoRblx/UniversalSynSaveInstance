@@ -2881,7 +2881,7 @@ local function synsaveinstance(CustomOptions, CustomOptions2)
 	for i,v in pairs(newCache) do
 		newnewCache[i] = map[v]
 	end
-	print("Done mapping.", )
+	print("Done mapping.")
 	newCache = newnewCache;
 	do
 		local Decompiler = decompile
