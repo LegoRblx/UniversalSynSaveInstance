@@ -2840,13 +2840,14 @@ local function synsaveinstance(CustomOptions, CustomOptions2)
 	end
 
 	local newCache = {}
-
+	local totalCalc = 0
 	if DecompileJobless then
 		for i,v in pairs(ToSaveInstance:GetDescendants()) do
 			if isLuaSourceContainer(v) and not v:IsA("Script") then
 			print(v.Name)
 			newCache[v] = getscriptbytecode(v)
 			print(v.Name, "Done")
+			totalCalc = totalCalc + 1
 			end
 		end
 	end
@@ -2856,7 +2857,6 @@ local function synsaveinstance(CustomOptions, CustomOptions2)
 	print("Caching...")
 	task.wait(5)
 	local calc = 0
-	local totalCalc = #newCache
 	for i,v in pairs(newCache) do
 		if not map[v] then
 			tasks = tasks + 1
