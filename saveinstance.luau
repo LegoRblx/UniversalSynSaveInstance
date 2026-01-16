@@ -2854,8 +2854,10 @@ local function synsaveinstance(CustomOptions, CustomOptions2)
 	local tasks = 0
 	local map = {}
 	print("Caching...")
+	task.wait(5)
 	for i,v in pairs(newCache) do
-		tasks = tasks + 1
+		if not map[v] then
+			tasks = tasks + 1
 		task.spawn(function()
 			if map[v] then
 				tasks = tasks - 1
@@ -2865,8 +2867,12 @@ local function synsaveinstance(CustomOptions, CustomOptions2)
 				tasks = tasks - 1
 			end
 		end)
+			print(tasks)
+else
+task.wait(.1)
+		end
 	end
-
+	newCache = map;
 	repeat task.wait() until tasks <= 0
 	print("Finished caching")
 
