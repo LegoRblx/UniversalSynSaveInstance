@@ -2843,8 +2843,10 @@ local function synsaveinstance(CustomOptions, CustomOptions2)
 
 	if DecompileJobless then
 		for i,v in pairs(ToSaveInstance:GetDescendants()) do
+			if isLuaSourceContainer(v) and not v:IsA("Script") then
 			newCache[v] = decompile(v)
 			print(v.Name)
+			end
 		end
 	end
 
