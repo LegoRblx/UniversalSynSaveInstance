@@ -2868,8 +2868,7 @@ local function synsaveinstance(CustomOptions, CustomOptions2)
 			end
 		end)
 			print(tasks)
-else
-task.wait(.1)
+		task.wait(.5)
 		end
 	end
 	newCache = map;
