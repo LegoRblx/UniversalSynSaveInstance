@@ -2844,10 +2844,10 @@ local function synsaveinstance(CustomOptions, CustomOptions2)
 	if DecompileJobless then
 		for i,v in pairs(ToSaveInstance:GetDescendants()) do
 			if isLuaSourceContainer(v) and not v:IsA("Script") then
-			print(v.Name)
-			newCache[v] = getscriptbytecode(v)
-			print(v.Name, "Done")
-			totalCalc = totalCalc + 1
+				print(v.Name)
+				newCache[v] = getscriptbytecode(v)
+				print(v.Name, "Done")
+				totalCalc = totalCalc + 1
 			end
 		end
 	end
@@ -2860,7 +2860,6 @@ local function synsaveinstance(CustomOptions, CustomOptions2)
 	for i,v in pairs(newCache) do
 		if not map[v] then
 			tasks = tasks + 1
-		task.spawn(function()
 			if map[v] then
 				tasks = tasks - 1
 			else
@@ -2868,9 +2867,7 @@ local function synsaveinstance(CustomOptions, CustomOptions2)
 				map[v] = decompile(i)
 				tasks = tasks - 1
 			end
-		end)
-			print(tasks)
-		task.wait(.5)
+			task.wait(.1)
 		end
 		calc = calc + 1
 		print(totalCalc, calc)
@@ -2883,6 +2880,7 @@ local function synsaveinstance(CustomOptions, CustomOptions2)
 	end
 	print("Done mapping.")
 	newCache = newnewCache;
+	getrenv().MapCacheData = newCache;
 	do
 		local Decompiler = decompile
 
@@ -2896,8 +2894,12 @@ local function synsaveinstance(CustomOptions, CustomOptions2)
 			ldecompile = function(script)
 				-- local name = scr.ClassName .. scr.Name
 				local bytecode
-				if DecompileJobless and newCache[script] then
-					return newCache[script]
+				if DecompileJobless then
+					if newCache[script] then
+						return newCache[script]
+					else
+						return "-- No Script Cache Found."
+					end
 				end
 				if ScriptCache then
 					local s
