@@ -2879,7 +2879,7 @@ local function synsaveinstance(CustomOptions, CustomOptions2)
 	print("Finished caching")
 	local newnewCache = {}
 	for i,v in pairs(newCache) do
-		newnewCache[i] = map[v]
+		newnewCache[i] = map[i]
 	end
 	print("Done mapping.")
 	newCache = newnewCache;
