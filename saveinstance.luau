@@ -2845,12 +2845,31 @@ local function synsaveinstance(CustomOptions, CustomOptions2)
 		for i,v in pairs(ToSaveInstance:GetDescendants()) do
 			if isLuaSourceContainer(v) and not v:IsA("Script") then
 			print(v.Name)
-			newCache[v] = decompile(v)
+			newCache[v] = getscriptbytecode(v)
 			wait(.1)
 			print(v.Name, "Done")
 			end
 		end
 	end
+
+	local tasks = 0
+	local map = {}
+	print("Caching...")
+	for i,v in pairs(newCache) do
+		tasks = tasks + 1
+		task.spawn(function()
+			if map[v] then
+				tasks = tasks - 1
+			else
+				map[v] = true
+				map[v] = decompile(i)
+				tasks = tasks - 1
+			end
+		end)
+	end
+
+	repeat task.wait() until tasks <= 0
+	print("Finished caching")
 
 	do
 		local Decompiler = decompile
