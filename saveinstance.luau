@@ -2864,7 +2864,7 @@ local function synsaveinstance(CustomOptions, CustomOptions2)
 				tasks = tasks - 1
 			else
 				map[v] = true
-				print(v)
+				print(i)
 				map[v] = decompile(i)
 				tasks = tasks - 1
 			end
