@@ -2868,7 +2868,7 @@ local function synsaveinstance(CustomOptions, CustomOptions2)
 				map[v] = decompile(i)
 				tasks = tasks - 1
 			end
-			task.wait(.1)
+			wait(.25)
 		end
 		calc = calc + 1
 		print(totalCalc, calc)
